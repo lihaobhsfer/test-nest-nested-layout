@@ -16,3 +16,11 @@ export default function Page({ params }) {
     </>
   );
 }
+
+export async function generateStaticParams() {
+  const res = await fetch("http://localhost:3001/movies");
+  const movies = await res.json();
+  return movies.map((movie) => ({
+    id: movie.id.toString(),
+  }));
+}
